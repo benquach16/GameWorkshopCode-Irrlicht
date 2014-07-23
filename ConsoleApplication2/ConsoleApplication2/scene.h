@@ -3,6 +3,7 @@
 #include <irrlicht.h>
 
 #include "object.h"
+#include "ball.h"
 
 class Scene
 {

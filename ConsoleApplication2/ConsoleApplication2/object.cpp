@@ -14,7 +14,7 @@ Object::Object(
 	irr::core::vector3df& position,
 	irr::core::vector3df& rotation,
 	irr::core::vector3df& scale) :
-mesh(mesh)
+	mesh(mesh), speed(0.05f), components((E_COMPONENTS)0x01)
 {
 	mesh->setPosition(position);
 	mesh->setRotation(rotation);
@@ -34,7 +34,11 @@ Object::~Object()
 
 void Object::run()
 {
-	setRotation(getRotation() + vector3df(5, 5, 0));
+	//setRotation(getRotation() + vector3df(5, 5, 0));
+	if (components & MOVEMENT)
+	{
+		movement();
+	}
 }
 
 const vector3df& Object::getPosition() const
@@ -65,4 +69,14 @@ void Object::setRotation(const vector3df& newRotation)
 void Object::setScale(const vector3df& newScale)
 {
 	mesh->setScale(newScale);
+}
+
+//protected functions
+void Object::movement()
+{
+	vector3df newPosition;
+	newPosition.X = cos(getRotation().X) * speed + getPosition().X;
+	newPosition.Y = sin(getRotation().X) * speed + getPosition().Y;
+	newPosition.Z = sin(getRotation().Y) * speed + getPosition().Z;
+	setPosition(newPosition);
 }

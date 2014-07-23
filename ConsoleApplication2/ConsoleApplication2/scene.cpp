@@ -13,6 +13,9 @@ Scene::Scene()
 	new Object(globals::device->getSceneManager()->addCubeSceneNode(),
 		vector3df(0,0,0),
 		vector3df(0,0,0));
+	new Ball(
+		vector3df(20, 0, 0),
+		vector3df(60, 30, 0));
 	globals::device->getSceneManager()->addCameraSceneNodeFPS();
 }
 
