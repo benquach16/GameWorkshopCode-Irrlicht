@@ -82,8 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h" />
+    <ClInclude Include="eventhandler.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="paddle.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -91,6 +93,7 @@
   <ItemGroup>
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="ConsoleApplication2.cpp" />
+    <ClCompile Include="eventhandler.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="scene.cpp" />

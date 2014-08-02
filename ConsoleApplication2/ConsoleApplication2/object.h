@@ -14,9 +14,11 @@ public:
 	static std::vector<Object*> allObjects;
 
 	Object(irr::scene::IMeshSceneNode *mesh,
+		E_COMPONENTS components,
 		irr::core::vector3df& position,
 		irr::core::vector3df& rotation,
-		irr::core::vector3df& scale = irr::core::vector3df(1,1,1));
+		irr::core::vector3df& scale = irr::core::vector3df(1,1,1)
+		);
 	virtual ~Object();
 
 	virtual void run();

@@ -4,6 +4,7 @@
 
 #include "object.h"
 #include "ball.h"
+#include "eventhandler.h"
 
 class Scene
 {
@@ -13,4 +14,5 @@ public:
 	void run();
 
 protected:
+	irr::scene::ICameraSceneNode *camera;
 };

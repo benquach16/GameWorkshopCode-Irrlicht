@@ -11,10 +11,11 @@ std::vector<Object*> Object::allObjects;
 
 Object::Object(
 	irr::scene::IMeshSceneNode *mesh,
+	E_COMPONENTS components,
 	irr::core::vector3df& position,
 	irr::core::vector3df& rotation,
 	irr::core::vector3df& scale) :
-	mesh(mesh), speed(0.05f), components((E_COMPONENTS)0x01)
+	mesh(mesh), speed(0.5f), components(components)
 {
 	mesh->setPosition(position);
 	mesh->setRotation(rotation);
@@ -75,8 +76,8 @@ void Object::setScale(const vector3df& newScale)
 void Object::movement()
 {
 	vector3df newPosition;
-	newPosition.X = cos(getRotation().X) * speed + getPosition().X;
-	newPosition.Y = sin(getRotation().X) * speed + getPosition().Y;
-	newPosition.Z = sin(getRotation().Y) * speed + getPosition().Z;
+	newPosition.X = sin((getRotation().Y*3.1415) / 180) * speed + getPosition().X;
+	newPosition.Y = sin((getRotation().X*3.1415) / 180) * speed + getPosition().Y;
+	newPosition.Z = cos((getRotation().Y*3.1415) / 180) * speed + getPosition().Z;
 	setPosition(newPosition);
 }

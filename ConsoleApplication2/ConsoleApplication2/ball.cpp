@@ -8,6 +8,7 @@ Ball::Ball(
 	irr::core::vector3df& scale) : 
 	Object(
 	globals::device->getSceneManager()->addSphereSceneNode(),
+	(E_COMPONENTS)0x01,
 	position,
 	rotation,
 	scale)
