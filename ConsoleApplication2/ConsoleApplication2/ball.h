@@ -9,7 +9,7 @@ public:
 		irr::core::vector3df& rotation,
 		irr::core::vector3df& scale = irr::core::vector3df(1, 1, 1));
 	virtual ~Ball();
-
+	virtual void run();
 protected:
 
 };

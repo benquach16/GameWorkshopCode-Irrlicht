@@ -17,7 +17,7 @@ using namespace scene;
 
 int _tmain(int argc, char* argv[])
 {
-	globals::device = createDevice(video::EDT_SOFTWARE, dimension2d<u32>(640, 480));
+	globals::device = createDevice(video::EDT_DIRECT3D9, dimension2d<u32>(640, 480));
 	Scene scene;
 
 	

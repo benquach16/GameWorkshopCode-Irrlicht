@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "globals.h"
+#include "paddle.h"
 #include "ball.h"
 
 Ball::Ball(
@@ -19,5 +20,14 @@ Ball::Ball(
 Ball::~Ball()
 {
 
+}
+
+
+void Ball::run()
+{
+	for (unsigned i = 0; i < Paddle::allPaddles.size(); i++)
+	{
+		getBoundingBox().intersectsWithBox(Paddle::allPaddles[i]->getBoundingBox());
+	}
 }
 

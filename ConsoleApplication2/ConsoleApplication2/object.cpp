@@ -39,6 +39,7 @@ void Object::run()
 	if (components & MOVEMENT)
 	{
 		movement();
+		
 	}
 }
 
@@ -70,6 +71,11 @@ void Object::setRotation(const vector3df& newRotation)
 void Object::setScale(const vector3df& newScale)
 {
 	mesh->setScale(newScale);
+}
+
+const irr::core::aabbox3df& Object::getBoundingBox() const
+{
+	return mesh->getBoundingBox();
 }
 
 //protected functions

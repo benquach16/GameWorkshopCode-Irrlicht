@@ -6,8 +6,13 @@
 class Player : public Paddle
 {
 public:
-	Player();
+	Player(
+		irr::core::vector3df& position,
+		irr::core::vector3df& rotation,
+		irr::core::vector3df& scale);
+	virtual void run();
 
+	virtual const bool isPlayer() const;
 protected:
 	EventHandler handler;
 };

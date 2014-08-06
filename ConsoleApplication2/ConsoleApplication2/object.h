@@ -30,10 +30,12 @@ public:
 	void setPosition(const irr::core::vector3df& newPosition);
 	void setRotation(const irr::core::vector3df& newRotation);
 	void setScale(const irr::core::vector3df& newScale);
+
+	const irr::core::aabbox3df& getBoundingBox() const;
 protected:
 	//for movement component
 	float speed;
-	void movement();
+	virtual void movement();
 
 	E_COMPONENTS components;
 	unsigned index;

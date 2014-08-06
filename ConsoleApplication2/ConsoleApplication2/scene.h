@@ -4,6 +4,7 @@
 
 #include "object.h"
 #include "ball.h"
+#include "player.h"
 #include "eventhandler.h"
 
 class Scene
