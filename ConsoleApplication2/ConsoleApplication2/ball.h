@@ -11,5 +11,5 @@ public:
 	virtual ~Ball();
 	virtual void run();
 protected:
-
+	virtual void movement();
 };

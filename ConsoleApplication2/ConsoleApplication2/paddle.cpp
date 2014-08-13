@@ -6,7 +6,7 @@
 using namespace irr;
 using namespace core;
 
-std::vector<Paddle*> allPaddles;
+std::vector<Paddle*> Paddle::allPaddles;
 
 Paddle::Paddle(
 	irr::core::vector3df& position,
@@ -23,6 +23,8 @@ Paddle::Paddle(
 	speed = 0;
 	srand(time(0));
 	setScale(vector3df(rand()%3+1, rand()%3+1, rand()%3+1));
+	allPaddles.push_back(this);
+	index = allPaddles.size() - 1;
 }
 
 void Paddle::run()
@@ -34,6 +36,12 @@ void Paddle::run()
 	}
 }
 
+void Paddle::takeDamage(int damage)
+{
+	health -= damage;
+	setScale(vector3df(rand() % 3 + 1, rand() % 3 + 1, rand() % 3 + 1));
+}
+
 const bool Paddle::isPlayer() const
 {
 	return false;
@@ -43,7 +51,39 @@ const bool Paddle::isPlayer() const
 //protected function
 void Paddle::runAi()
 {
-	
+	//transitions
+	switch (currentState)
+	{
+		case STATE_INIT:
+			currentState = STATE_DODGE;
+			break;
+		case STATE_DODGE:
+			if (health > 0)
+				currentState = STATE_DODGE;
+			else
+				currentState = STATE_DIE;
+			break;
+		case STATE_DIE:
+			break;
+		default:
+			currentState = STATE_INIT;
+			break;
+	}
+
+	//actions
+	switch (currentState)
+	{
+		case STATE_INIT:
+			break;
+		case STATE_DODGE:
+			if (rand() % 10 < 5)
+				speed = PADDLESPEED;
+			else
+				speed = -PADDLESPEED;
+			break;
+		case STATE_DIE:
+			break;
+	}
 }
 
 //protected function

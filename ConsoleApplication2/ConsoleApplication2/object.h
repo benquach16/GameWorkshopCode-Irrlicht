@@ -26,6 +26,7 @@ public:
 	const irr::core::vector3df& getPosition() const;
 	const irr::core::vector3df& getRotation() const;
 	const irr::core::vector3df& getScale() const;
+	irr::scene::IMeshSceneNode* getMesh();
 	//mutators
 	void setPosition(const irr::core::vector3df& newPosition);
 	void setRotation(const irr::core::vector3df& newRotation);

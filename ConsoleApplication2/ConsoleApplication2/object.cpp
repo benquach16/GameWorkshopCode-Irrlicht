@@ -15,11 +15,13 @@ Object::Object(
 	irr::core::vector3df& position,
 	irr::core::vector3df& rotation,
 	irr::core::vector3df& scale) :
-	mesh(mesh), speed(0.5f), components(components)
+	mesh(mesh), speed(0.2f), components(components)
 {
 	mesh->setPosition(position);
 	mesh->setRotation(rotation);
 	mesh->setScale(scale);
+
+
 
 	Object::allObjects.push_back(this);
 	index = Object::allObjects.size() - 1;
@@ -56,6 +58,11 @@ const vector3df& Object::getRotation() const
 const vector3df& Object::getScale() const
 {
 	return mesh->getScale();
+}
+
+irr::scene::IMeshSceneNode *Object::getMesh()
+{
+	return mesh;
 }
 
 void Object::setPosition(const vector3df& newPosition)
