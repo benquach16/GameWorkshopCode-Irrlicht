@@ -32,8 +32,10 @@ void Ball::run()
 {
 	for (unsigned i = 0; i < Paddle::allPaddles.size(); i++)
 	{
-		if (getPosition().getDistanceFrom(Paddle::allPaddles[i]->getPosition()) < 5)
+		//if (getPosition().getDistanceFrom(Paddle::allPaddles[i]->getPosition()) < 5)
+		if(Paddle::allPaddles[i]->getBoundingBox().intersectsWithBox(getBoundingBox()))
 		{
+			aabbox3df t = Paddle::allPaddles[i]->getBoundingBox();
 			//speed = -speed;
 			vector3df newRot(getRotation());
 			newRot.Y += rand()%270+90;

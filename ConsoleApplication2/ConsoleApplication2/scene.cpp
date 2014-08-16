@@ -21,13 +21,14 @@ Scene::Scene()
 	new Ball(
 		vector3df(0, 0, 0),
 		vector3df(0, 0, 0));
+	/*
 	Object* background = new Object(
 		globals::device->getSceneManager()->addCubeSceneNode(),
 		(Object::E_COMPONENTS)0x00,
 		vector3df(0, 0, 0),
 		vector3df(0, 0, 0),
 		vector3df(40, 0.1, 100));
-
+		*/
 	new Wall(
 		vector3df(70, 5, 0),
 		vector3df(0, 0, 0),
@@ -36,7 +37,7 @@ Scene::Scene()
 		vector3df(-70, 5, 0),
 		vector3df(0, 0, 0),
 		vector3df(1, 1, 1));
-	background->getMesh()->setMaterialTexture(0, globals::device->getVideoDriver()->getTexture("Resources/Art/God.jpg"));
+	//background->getMesh()->setMaterialTexture(0, globals::device->getVideoDriver()->getTexture("Resources/Art/God.jpg"));
 	camera = globals::device->getSceneManager()->addCameraSceneNode();
 	camera->setPosition(vector3df(0, 100, 0));
 	
