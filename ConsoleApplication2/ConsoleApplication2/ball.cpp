@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "paddle.h"
 #include "ball.h"
+#include "wall.h"
 
 using namespace irr;
 using namespace core;
@@ -32,17 +33,46 @@ void Ball::run()
 {
 	for (unsigned i = 0; i < Paddle::allPaddles.size(); i++)
 	{
-		if (getPosition().getDistanceFrom(Paddle::allPaddles[i]->getPosition()) < 5)
+		if (Paddle::allPaddles[i]->getBoundingBox().intersectsWithBox(getBoundingBox()))
 		{
-			//speed = -speed;
-			vector3df newRot(getRotation());
-			newRot.Y += rand()%270+90;
-			setRotation(newRot);
+			realisticPhysics();
 			//if collides
-			Paddle::allPaddles[i]->takeDamage(5);
+			//Paddle::allPaddles[i]->takeDamage(5);
+			delete Paddle::allPaddles[i];
+		}
+	}
+	for (unsigned i = 0; i < Wall::allWalls.size(); i++)
+	{
+		if (Wall::allWalls[i]->getBoundingBox().intersectsWithBox(getBoundingBox()))
+		{
+			realisticPhysics();
+
+		}
+	}
+	if (getPosition().Z > 90 || getPosition().Z < -90)
+	{
+		if (rand() % 2 < 1)
+		{
+			vector3df newPos = getPosition();
+			newPos.Z = -newPos.Z;
+			setPosition(newPos);
+		}
+		else
+		{
+			realisticPhysics();
+			setPosition(vector3df(rand() % 40 - 20, rand() % 40 - 20, rand() % 40 - 20));
 		}
 	}
 	Object::run();
+}
+
+//protected
+void Ball::realisticPhysics()
+{
+	//speed = -speed;
+	vector3df newRot(getRotation());
+	newRot.Y += rand() % 270 + 90;
+	setRotation(newRot);
 }
 
 void Ball::movement()

@@ -5,6 +5,8 @@
 
 using namespace irr;
 using namespace core;
+using namespace scene;
+using namespace video;
 
 std::vector<Paddle*> Paddle::allPaddles;
 
@@ -25,6 +27,33 @@ Paddle::Paddle(
 	setScale(vector3df(rand()%3+1, rand()%3+1, rand()%3+1));
 	allPaddles.push_back(this);
 	index = allPaddles.size() - 1;
+}
+
+Paddle::~Paddle()
+{
+	//do EXPLOSIONS
+
+	scene::IParticleSystemSceneNode *particleSys;
+	particleSys = globals::device->getSceneManager()->addParticleSystemSceneNode(false, 0, -1, getPosition());
+	scene::IParticleEmitter *em = particleSys->createPointEmitter(
+		vector3df(0, 0, 0),
+		2000, 4000,
+		SColor(255, 255, 255, 255),
+		SColor(255, 255, 255, 255),
+		1000,
+		2000,
+		0,
+		dimension2df(5, 5),
+		dimension2df(15, 15));
+	particleSys->setEmitter(em);
+	IParticleAffector *af = particleSys->createAttractionAffector(getPosition(), -100000.f);
+	particleSys->addAffector(af);
+	af->drop();
+	em->drop();
+
+	allPaddles[index] = allPaddles.back();
+	allPaddles[index]->index = index;
+	allPaddles.pop_back();
 }
 
 void Paddle::run()

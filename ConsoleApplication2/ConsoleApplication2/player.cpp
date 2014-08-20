@@ -13,16 +13,22 @@ Player::Player(
 	rotation,
 	scale)
 {
-	globals::device->setEventReceiver(&handler);
+	handler = new EventHandler;
+	globals::device->setEventReceiver(handler);
+}
+
+Player::~Player()
+{
+
 }
 
 void Player::run()
 {
-	if (handler.isKeyDown(irr::KEY_UP))
+	if (handler->isKeyDown(irr::KEY_UP))
 	{
 		speed = -PADDLESPEED;
 	}
-	else if (handler.isKeyDown(irr::KEY_DOWN))
+	else if (handler->isKeyDown(irr::KEY_DOWN))
 	{
 		speed = PADDLESPEED;
 	}
