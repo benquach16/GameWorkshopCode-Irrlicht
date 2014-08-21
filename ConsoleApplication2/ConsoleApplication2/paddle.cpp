@@ -27,6 +27,11 @@ Paddle::Paddle(
 	index = allPaddles.size() - 1;
 }
 
+Paddle::~Paddle()
+{
+
+}
+
 void Paddle::run()
 {
 	Object::run();

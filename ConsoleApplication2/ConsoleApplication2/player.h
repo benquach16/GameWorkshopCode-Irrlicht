@@ -10,9 +10,10 @@ public:
 		irr::core::vector3df& position,
 		irr::core::vector3df& rotation,
 		irr::core::vector3df& scale);
+	virtual ~Player();
 	virtual void run();
 
 	virtual const bool isPlayer() const;
 protected:
-	EventHandler handler;
+	EventHandler *handler;
 };
