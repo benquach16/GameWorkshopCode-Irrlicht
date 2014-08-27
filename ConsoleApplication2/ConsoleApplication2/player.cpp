@@ -11,7 +11,8 @@ Player::Player(
 	Paddle(
 	position,
 	rotation,
-	scale)
+	scale),
+	timeKeeping(0)
 {
 	handler = new EventHandler;
 	globals::device->setEventReceiver(handler);
@@ -36,10 +37,20 @@ void Player::run()
 	{
 		speed = 0;
 	}
+	if (timeKeeping < globals::device->getTimer()->getTime())
+	{
+		score++;
+		timeKeeping = globals::device->getTimer()->getTime() + 1000;
+	}
 	Paddle::run();
 }
 
 const bool Player::isPlayer() const
 {
 	return true;
+}
+
+const int Player::getScore() const
+{
+	return score;
 }

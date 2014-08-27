@@ -84,8 +84,11 @@ void Object::setScale(const vector3df& newScale)
 const irr::core::aabbox3df Object::getBoundingBox() const
 {
 	aabbox3df ret = mesh->getBoundingBox();
+	ret.MaxEdge *= getScale();
+	ret.MinEdge *= getScale();
 	ret.MaxEdge += getPosition();
 	ret.MinEdge += getPosition();
+
 	return ret;
 }
 

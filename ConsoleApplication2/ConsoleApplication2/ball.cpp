@@ -20,7 +20,7 @@ Ball::Ball(
 	rotation,
 	scale)
 {
-
+	speed = 1.f;
 }
 
 Ball::~Ball()
@@ -37,8 +37,8 @@ void Ball::run()
 		{
 			realisticPhysics();
 			//if collides
-			//Paddle::allPaddles[i]->takeDamage(5);
-			delete Paddle::allPaddles[i];
+			Paddle::allPaddles[i]->takeDamage(5);
+			//delete Paddle::allPaddles[i];
 		}
 	}
 	for (unsigned i = 0; i < Wall::allWalls.size(); i++)
@@ -60,7 +60,7 @@ void Ball::run()
 		else
 		{
 			realisticPhysics();
-			setPosition(vector3df(rand() % 40 - 20, rand() % 40 - 20, rand() % 40 - 20));
+			setPosition(vector3df(rand() % 40 - 20,0, rand() % 40 - 20));
 		}
 	}
 	Object::run();
@@ -71,7 +71,7 @@ void Ball::realisticPhysics()
 {
 	//speed = -speed;
 	vector3df newRot(getRotation());
-	newRot.Y += rand() % 270 + 90;
+	newRot.Y += rand() % 180 + 90;
 	setRotation(newRot);
 }
 

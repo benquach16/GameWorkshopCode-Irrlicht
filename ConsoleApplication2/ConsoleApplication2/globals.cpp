@@ -3,5 +3,6 @@
 
 namespace globals
 {
+	irrklang::ISoundEngine *sound = 0;
 	irr::IrrlichtDevice *device = 0;
 }

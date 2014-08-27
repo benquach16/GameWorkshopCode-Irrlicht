@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "globals.h"
 #include "paddle.h"
+#include "ball.h"
 #include <time.h> 
 
 using namespace irr;
@@ -35,7 +36,9 @@ Paddle::~Paddle()
 
 	scene::IParticleSystemSceneNode *particleSys;
 	particleSys = globals::device->getSceneManager()->addParticleSystemSceneNode(false, 0, -1, getPosition());
-	scene::IParticleEmitter *em = particleSys->createPointEmitter(
+	scene::IParticleEmitter *em = particleSys->createSphereEmitter(
+		vector3df(0,0,0),
+		5,
 		vector3df(0, 0, 0),
 		2000, 4000,
 		SColor(255, 255, 255, 255),
@@ -46,8 +49,10 @@ Paddle::~Paddle()
 		dimension2df(5, 5),
 		dimension2df(15, 15));
 	particleSys->setEmitter(em);
-	IParticleAffector *af = particleSys->createAttractionAffector(getPosition(), -100000.f);
+	IParticleAffector *af = particleSys->createAttractionAffector(getPosition(), -10.f);
 	particleSys->addAffector(af);
+	particleSys->setMaterialTexture(0, globals::device->getVideoDriver()->getTexture("Resources/Art/explosion.png"));
+	particleSys->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 	af->drop();
 	em->drop();
 
@@ -69,11 +74,25 @@ void Paddle::takeDamage(int damage)
 {
 	health -= damage;
 	setScale(vector3df(rand() % 3 + 1, rand() % 3 + 1, rand() % 3 + 1));
+	for (unsigned i = 0; i < rand() % 2; i++)
+		new Ball(
+		vector3df(0, 0, 0),
+		vector3df(0, 0, 0));
 }
 
 const bool Paddle::isPlayer() const
 {
 	return false;
+}
+
+const bool Paddle::isDead() const
+{
+	return health < 1;
+}
+
+const int Paddle::getHealth() const
+{
+	return health;
 }
 
 

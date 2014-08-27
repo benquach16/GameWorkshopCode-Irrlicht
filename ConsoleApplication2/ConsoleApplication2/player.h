@@ -14,6 +14,10 @@ public:
 	virtual void run();
 
 	virtual const bool isPlayer() const;
+
+	const int getScore() const;
 protected:
+	int score;
+	int timeKeeping;
 	EventHandler *handler;
 };

@@ -1,13 +1,16 @@
 #pragma once
 
+#include <irrlicht.h>
+#include "player.h"
 
 class HUD
 {
 public:
 	HUD();
 	~HUD();
-	void run();
+	void run(const Player* player);
 
 protected:
-	IGUIStaticText * text;
+	irr::gui::IGUIStaticText * health;
+	irr::gui::IGUIStaticText * score;
 };

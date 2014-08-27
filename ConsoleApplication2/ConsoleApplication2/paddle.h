@@ -22,6 +22,9 @@ public:
 	virtual void run();
 	void takeDamage(int damage);
 	virtual const bool isPlayer() const;
+	const bool isDead() const;
+	//accessors
+	const int getHealth() const;
 protected:
 	AI_STATES currentState;
 	void runAi();

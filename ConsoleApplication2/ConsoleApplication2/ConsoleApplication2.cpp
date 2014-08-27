@@ -7,8 +7,10 @@
 #include "globals.h"
 
 #pragma comment(lib, "Irrlicht.lib")
+#pragma comment(lib, "irrklang.lib")
 
 using namespace irr;
+using namespace irrklang;
 using namespace video;
 using namespace core;
 using namespace gui;
@@ -18,6 +20,8 @@ using namespace scene;
 int _tmain(int argc, char* argv[])
 {
 	globals::device = createDevice(video::EDT_DIRECT3D9, dimension2d<u32>(640, 480));
+	globals::sound = createIrrKlangDevice();
+	globals::sound->play2D("Resources/Sound/music.wav", true);
 	Scene scene;
 
 	

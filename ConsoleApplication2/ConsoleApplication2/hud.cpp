@@ -10,10 +10,15 @@ using namespace scene;
 
 HUD::HUD()
 {
-	text = globals::device->getGUIEnvironment()->addStaticText(
+	health = globals::device->getGUIEnvironment()->addStaticText(
 		L"TestText",
 		rect<s32>(100, 100, 300, 300));
-	text->setOverrideColor(SColor(255, 255, 255, 0));
+	health->setOverrideColor(SColor(255, 255, 255, 0));
+
+	score = globals::device->getGUIEnvironment()->addStaticText(
+		L"TestText",
+		rect<s32>(200, 200, 300, 300));
+	score->setOverrideColor(SColor(255, 255, 255, 0));
 }
 
 HUD::~HUD()
@@ -21,7 +26,8 @@ HUD::~HUD()
 
 }
 
-void HUD::run()
+void HUD::run(const Player * player)
 {
-	
+	health->setText(core::stringw(player->getHealth()).c_str());
+	score->setText(core::stringw(player->getScore()).c_str());
 }

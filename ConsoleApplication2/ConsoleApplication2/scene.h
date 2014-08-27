@@ -20,4 +20,6 @@ protected:
 	irr::scene::ICameraSceneNode *camera;
 	Ball* ball;
 	HUD* hud;
+	Player *player;
+	irr::scene::ILightSceneNode* light;
 };
