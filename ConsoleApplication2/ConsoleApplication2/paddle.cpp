@@ -52,7 +52,7 @@ Paddle::~Paddle()
 	IParticleAffector *af = particleSys->createAttractionAffector(getPosition(), -10.f);
 	particleSys->addAffector(af);
 	particleSys->setMaterialTexture(0, globals::device->getVideoDriver()->getTexture("Resources/Art/explosion.png"));
-	particleSys->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+	particleSys->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
 	af->drop();
 	em->drop();
 

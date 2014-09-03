@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include <irrlicht.h>
 #include "scene.h"
+#include "gamescene.h"
+#include "menuscene.h"
 #include "globals.h"
 
 #pragma comment(lib, "Irrlicht.lib")
@@ -19,21 +21,32 @@ using namespace scene;
 
 int _tmain(int argc, char* argv[])
 {
-	globals::device = createDevice(video::EDT_DIRECT3D9, dimension2d<u32>(640, 480));
+	globals::screenX = 640;
+	globals::screenY = 480;
+	globals::device = createDevice(video::EDT_DIRECT3D9, dimension2d<u32>(globals::screenX, globals::screenY));
 	globals::sound = createIrrKlangDevice();
-	globals::sound->play2D("Resources/Sound/music.wav", true);
-	Scene scene;
-
-	
+	globals::sound->play2D("Resources/Sound/music.wav", true);	
+	Scene *currentScene;
+	currentScene = new MenuScene;
 	while (globals::device->run())
 	{
 		globals::device->getVideoDriver()->beginScene(true, true, SColor(255, 100, 101, 140));
-		scene.run();
+		Scene::E_SCENE_RETURN_CODE retCode = currentScene->run();
+		if (retCode == Scene::SWITCH_TOGAME)
+		{
+			delete currentScene;
+			currentScene = new GameScene;
+		}
+		if (retCode == Scene::EXIT_GAME)
+		{
+			break;
+		}
 		globals::device->getSceneManager()->drawAll();
 		globals::device->getGUIEnvironment()->drawAll();
 
 		globals::device->getVideoDriver()->endScene();
 	}
+	delete currentScene;
 	return 0;
 }
 

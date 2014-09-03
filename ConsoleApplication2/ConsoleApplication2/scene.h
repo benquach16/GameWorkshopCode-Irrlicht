@@ -12,14 +12,18 @@
 class Scene
 {
 public:
+	enum E_SCENE_RETURN_CODE
+	{
+		DONOTHING=0,
+		EXIT_GAME,
+		SWITCH_TOGAME,
+		SWITCH_TOMENU
+
+	};
 	Scene();
-	~Scene();
-	void run();
-	void aiBullshit();
+	virtual ~Scene();
+	virtual E_SCENE_RETURN_CODE run() = 0;
+
 protected:
-	irr::scene::ICameraSceneNode *camera;
-	Ball* ball;
-	HUD* hud;
-	Player *player;
-	irr::scene::ILightSceneNode* light;
+
 };

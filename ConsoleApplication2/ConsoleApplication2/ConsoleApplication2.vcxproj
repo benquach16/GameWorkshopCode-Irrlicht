@@ -83,8 +83,10 @@
   <ItemGroup>
     <ClInclude Include="ball.h" />
     <ClInclude Include="eventhandler.h" />
+    <ClInclude Include="gamescene.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hud.h" />
+    <ClInclude Include="menuscene.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="paddle.h" />
     <ClInclude Include="player.h" />
@@ -97,8 +99,10 @@
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="ConsoleApplication2.cpp" />
     <ClCompile Include="eventhandler.cpp" />
+    <ClCompile Include="gamescene.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hud.cpp" />
+    <ClCompile Include="menuscene.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="paddle.cpp" />
     <ClCompile Include="player.cpp" />
