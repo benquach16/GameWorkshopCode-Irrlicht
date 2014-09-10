@@ -11,6 +11,10 @@ using namespace scene;
 
 MenuScene::MenuScene()
 {
+	bkg = globals::device->getGUIEnvironment()->addImage(
+		globals::device->getVideoDriver()->getTexture("Resources/Art/bkg.jpg"), position2d<s32>(0, 0), false);	
+	bkg->setMaxSize(dimension2du(globals::screenX, globals::screenY));
+	bkg->setScaleImage(true);
 	IGUIFont *largeFont = globals::device->getGUIEnvironment()->getFont("Resources/Font/verdana_large.xml");
 	title = globals::device->getGUIEnvironment()->addStaticText(
 		L"Pong Remixed",
@@ -28,6 +32,8 @@ MenuScene::MenuScene()
 		);
 	quitGame->setText(L"Quit Game");
 
+
+
 }
 
 
@@ -36,13 +42,14 @@ MenuScene::~MenuScene()
 	title->remove();
 	playGame->remove();
 	quitGame->remove();
+	bkg->remove();
 }
 
 Scene::E_SCENE_RETURN_CODE MenuScene::run()
 {
 	if (playGame->isPressed())
 	{
-		return Scene::SWITCH_TOGAME;
+		return Scene::SWITCH_TOTUTORIAL;
 	}
 	if (quitGame->isPressed())
 	{

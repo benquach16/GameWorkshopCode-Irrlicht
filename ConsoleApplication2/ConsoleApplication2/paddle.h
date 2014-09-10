@@ -32,4 +32,6 @@ protected:
 	int health;
 	int maxHealth;
 	int index;
+	int timer;
+	bool damaged;
 };

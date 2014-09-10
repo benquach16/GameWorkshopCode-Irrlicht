@@ -70,6 +70,7 @@ GameScene::~GameScene()
 	{
 		delete Object::allObjects[i];
 	}
+	globals::device->getSceneManager()->clear();
 	delete hud;
 }
 
@@ -87,8 +88,11 @@ Scene::E_SCENE_RETURN_CODE GameScene::run()
 	else
 	{
 		player = 0;
+		
 	}
 	aiBullshit();
+	if (!player)
+		return Scene::SWITCH_TOMENU;
 	return Scene::DONOTHING;
 }
 

@@ -23,7 +23,8 @@ HUD::HUD()
 
 HUD::~HUD()
 {
-
+	health->remove();
+	score->remove();
 }
 
 void HUD::run(const Player * player)

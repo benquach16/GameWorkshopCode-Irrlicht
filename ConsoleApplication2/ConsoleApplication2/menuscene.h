@@ -13,5 +13,6 @@ protected:
 	irr::gui::IGUIStaticText *title;
 	irr::gui::IGUIButton *playGame;
 	irr::gui::IGUIButton *quitGame;
+	irr::gui::IGUIImage *bkg;
 };
 

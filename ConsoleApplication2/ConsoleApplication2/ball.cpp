@@ -20,7 +20,7 @@ Ball::Ball(
 	rotation,
 	scale)
 {
-	speed = 1.f;
+	speed = 0.1f;
 }
 
 Ball::~Ball()
@@ -71,7 +71,7 @@ void Ball::realisticPhysics()
 {
 	//speed = -speed;
 	vector3df newRot(getRotation());
-	newRot.Y += rand() % 180 + 90;
+	newRot.Y += 180 + rand()%20-10;
 	setRotation(newRot);
 }
 

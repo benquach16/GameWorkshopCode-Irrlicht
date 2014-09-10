@@ -21,7 +21,7 @@ Paddle::Paddle(
 	position,
 	rotation,
 	scale),
-	maxHealth(100), health(100)
+	maxHealth(100), health(100), damaged(false)
 {
 	speed = 0;
 	srand(time(0));
@@ -68,16 +68,27 @@ void Paddle::run()
 	{
 		runAi();
 	}
+	if (damaged)
+	{
+		if (timer <= globals::device->getTimer()->getTime())
+		{
+
+			setScale(vector3df(rand() % 3 + 1, rand() % 3 + 1, rand() % 3 + 1));
+			for (unsigned i = 0; i < rand() % 2; i++)
+				new Ball(
+				vector3df(0, 0, 0),
+				vector3df(0, 0, 0));
+			damaged = false;
+		}
+	}
 }
 
 void Paddle::takeDamage(int damage)
 {
 	health -= damage;
-	setScale(vector3df(rand() % 3 + 1, rand() % 3 + 1, rand() % 3 + 1));
-	for (unsigned i = 0; i < rand() % 2; i++)
-		new Ball(
-		vector3df(0, 0, 0),
-		vector3df(0, 0, 0));
+	damaged = true;
+	timer = globals::device->getTimer()->getTime() + 400;
+
 }
 
 const bool Paddle::isPlayer() const

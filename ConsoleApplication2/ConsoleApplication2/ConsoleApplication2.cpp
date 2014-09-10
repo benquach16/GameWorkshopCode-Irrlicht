@@ -6,6 +6,7 @@
 #include "scene.h"
 #include "gamescene.h"
 #include "menuscene.h"
+#include "tutorialscene.h"
 #include "globals.h"
 
 #pragma comment(lib, "Irrlicht.lib")
@@ -28,23 +29,48 @@ int _tmain(int argc, char* argv[])
 	globals::sound->play2D("Resources/Sound/music.wav", true);	
 	Scene *currentScene;
 	currentScene = new MenuScene;
+	int switchTimer;
+	bool endGame = false;
 	while (globals::device->run())
 	{
 		globals::device->getVideoDriver()->beginScene(true, true, SColor(255, 100, 101, 140));
 		Scene::E_SCENE_RETURN_CODE retCode = currentScene->run();
+
+		globals::device->getSceneManager()->drawAll();
+		globals::device->getGUIEnvironment()->drawAll();
+
+		globals::device->getVideoDriver()->endScene();
 		if (retCode == Scene::SWITCH_TOGAME)
 		{
+
+				delete currentScene;
+				currentScene = new GameScene;
+			
+		}
+		if (retCode == Scene::SWITCH_TOTUTORIAL)
+		{
 			delete currentScene;
-			currentScene = new GameScene;
+			currentScene = new TutorialScene;
+		}
+		if (retCode == Scene::SWITCH_TOMENU)
+		{
+			if (!endGame)
+			{
+			switchTimer = globals::device->getTimer()->getTime() + 4000;
+			endGame = true;
+			}
+
+			if (switchTimer <= globals::device->getTimer()->getTime())
+			{
+				delete currentScene;
+				endGame = false;
+				currentScene = new MenuScene;
+			}
 		}
 		if (retCode == Scene::EXIT_GAME)
 		{
 			break;
 		}
-		globals::device->getSceneManager()->drawAll();
-		globals::device->getGUIEnvironment()->drawAll();
-
-		globals::device->getVideoDriver()->endScene();
 	}
 	delete currentScene;
 	return 0;
